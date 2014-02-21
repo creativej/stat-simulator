@@ -1,0 +1,15 @@
+{
+	"name": "dbfaker",
+	"description": "A fake db server",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"express": "3.x",
+		"Faker": "0.7.x",
+		"cron": "1.0.x",
+		"db-migrate": "v0.6.x",
+		"sequelize": "v1.6.x",
+		"mysql": "v2.1.x"
+	}
+}
+

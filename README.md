@@ -7,8 +7,8 @@ A server for simulating real time stats
 Usage
 ===
 
-__npm install__
+npm install
 
-__rename database.json.example to database.json. Update it if you need to.__
+rename database.json.example to database.json. Update it to match your database.
 
-__node server.js__
+node server.js

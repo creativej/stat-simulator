@@ -4,6 +4,11 @@ var
 
 /**
  * List of tables and its config for simulation
+ * Note: If you're changing the schema of an existing table you will need to
+ * write/run a database migration for it.
+ * You can do that using Sequelize's migrations feature
+ *
+ * http://sequelizejs.com/docs/latest/migrations
 **/
 module.exports = {
     /**
@@ -55,7 +60,7 @@ module.exports = {
     visits: {
         fields: Table.fields(),
         randomOffset: function() {
-            return Math.random() * (0.05 + 0.5);
+            return 0.05 + Math.random() * 0.05;
         },
         disable: false,
         rate: '*/15 * * * * *'

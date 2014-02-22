@@ -1,6 +1,6 @@
 {
-	"name": "dbfaker",
-	"description": "A fake db server",
+	"name": "statsimulator",
+	"description": "A server for simulating real time stats",
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {

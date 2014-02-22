@@ -22,7 +22,7 @@ server.init = function() {
 
         if (!table.disable) {
             console.log('table: ', tableName);
-            new cronJob(table.rate, simulator(tableName, table, orm).init, null, true);
+            new cronJob(table.rate, simulator(tableName, table, orm.models).init, null, true);
         }
     }
 };

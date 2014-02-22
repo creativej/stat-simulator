@@ -1,0 +1,16 @@
+{
+    "dev": {
+        "driver": "mysql",
+        "host": "127.0.0.1",
+        "database": "statsimulator_dev",
+        "user": "root",
+        "password": "root"
+    }
+    "prod": {
+        "driver": "mysql",
+        "host": "127.0.0.1",
+        "database": "statsimulator_dev",
+        "user": "root",
+        "password": "root"
+    }
+}

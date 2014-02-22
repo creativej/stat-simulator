@@ -7,6 +7,8 @@ A server for simulating real time stats
 Usage
 ===
 
->npm install
+__npm install__
 
->node server.js
+__rename database.json.example to database.json. Update it if you need to.__
+
+__node server.js__

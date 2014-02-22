@@ -1,18 +1,21 @@
-var simulator = function(tableName, table, orm) {
+/**
+ * Simulating insertion of a given table and its config
+**/
+var simulator = function(tableName, table, models) {
     function skip(table) {
-        var random = Math.random();
-        return typeof table.randomOffset === 'undefined' || random <= table.randomOffset;
+        if (typeof table.randomOffset === 'function') {
+            return table.randomOffset();
+        }
+
+        return typeof table.randomOffset === 'undefined' || Math.random() <= table.randomOffset;
     }
 
     function insert(data) {
-        console.log('inserting.. ');
-        orm.models[tableName].create(data).success(function() {
-            console.log('... done!');
-        });
+        models[tableName].create(data);
     }
 
     function findForeignKey(table, name, callback) {
-        orm.models[table].find({
+        models[table].find({
             limit: 1,
             attributes: ['id'],
             order: 'RAND()'

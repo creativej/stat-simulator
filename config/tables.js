@@ -1,5 +1,6 @@
 var
     Sequelize = require('sequelize'),
+    extend = require('extend'),
     Faker = require('Faker');
 
 var types = {
@@ -16,12 +17,20 @@ var types = {
     }
 };
 
+function tableFields(override) {
+    return extend(true, {
+        id: {
+            type: types.primaryKey
+        },
+        createdAt: {
+            type: types.timestamp
+        }
+    }, override);
+}
+
 var tables = {
     users: {
-        fields: {
-            id: {
-                type: types.primaryKey
-            },
+        fields: tableFields({
             name: {
                 type: types.string,
                 value: function() {
@@ -33,21 +42,17 @@ var tables = {
                 value: function() {
                     return Faker.Internet.email();
                 }
-            },
-            createdAt: {
-                type: types.timestamp
             }
-        },
+        }),
         randomOffset: 0.1,
-        rate: '0 */2 * * * *' // Cron pattern http://crontab.org/
+        disable: false,
+        rate: '0 */5 * * * *' // Cron pattern http://crontab.org/
     },
     invoices: {
-        fields: {
-            id: {
-                type: types.primaryKey
-            },
+        fields: tableFields({
             userId: {
-                type: types.integer
+                type: types.integer,
+                relation: 'users'
             },
             total: {
                 type: types.integer,
@@ -55,9 +60,15 @@ var tables = {
                     return 20 + Math.round(Math.random() * 1200);
                 }
             }
-        },
+        }),
         randomOffset: 0.2,
         rate: '0 * * * * *'
+    },
+    visits: {
+        fields: tableFields(),
+        randomOffset: 0.2,
+        disable: false,
+        rate: '* * * * * *'
     }
 };
 

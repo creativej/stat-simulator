@@ -3,7 +3,6 @@ var
     tables = require('./config/tables'),
     simulator = require('./simulator'),
     cronJob = require('cron').CronJob,
-    en = require('lingo').en,
     server = {
         mode: process.env.mode || 'dev',
         config: function(name) {

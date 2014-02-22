@@ -8,7 +8,7 @@
 		"cron": "1.0.x",
 		"sequelize": "v1.7.x",
 		"mysql": "v2.1.x",
-		"lingo": "0.0.x"
+		"extend": "1.2.x"
 	}
 }
 

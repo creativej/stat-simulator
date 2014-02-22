@@ -1,7 +1,6 @@
 module.exports = function(config, tables) {
     var
         Sequelize = require('sequelize'),
-        en = require('lingo').en,
         sequelize = new Sequelize(config.database, config.user, config.password),
         orm = {
             sequelize: sequelize,
@@ -26,7 +25,9 @@ module.exports = function(config, tables) {
         );
     }
 
-    sequelize.sync();
+    sequelize.sync({
+        // force: true
+    });
 
     return orm;
 };

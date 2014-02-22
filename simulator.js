@@ -6,7 +6,6 @@ var simulator = function(tableName, table, orm) {
 
     function insert(data) {
         console.log('inserting.. ');
-        console.log(data);
         orm.models[tableName].create(data).success(function() {
             console.log('... done!');
         });
@@ -18,7 +17,9 @@ var simulator = function(tableName, table, orm) {
             attributes: ['id'],
             order: 'RAND()'
         }).success(function(record) {
-            callback(name, record.values.id);
+            if (record) {
+                callback(name, record.values.id);
+            }
         });
     }
 
@@ -28,15 +29,16 @@ var simulator = function(tableName, table, orm) {
                 return;
             }
 
-            var self;
-            var data = {};
-            var waiting = [];
+            var
+                self,
+                data = {},
+                waiting = []
+                ;
 
             for (var fieldName in table.fields) {
                 var field = table.fields[fieldName];
                 if (field.relation) {
                     waiting.push('');
-
                     findForeignKey(field.relation, fieldName, function(name, value) {
                         data[name] = value;
                         waiting.pop();

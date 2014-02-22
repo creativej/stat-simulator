@@ -66,7 +66,7 @@ var tables = {
     },
     visits: {
         fields: tableFields(),
-        randomOffset: 0.2,
+        randomOffset: 0.1,
         disable: false,
         rate: '* * * * * *'
     }

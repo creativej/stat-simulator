@@ -11,13 +11,15 @@ var
             }[name];
         }
     },
-    orm = require('./config/orm')(server.config('db'))
+    orm = require('./config/orm')(server.config('db'), tables)
     ;
 
 server.init = function() {
+    console.log('simulating... ');
+
     for (var tableName in tables) {
         var table = tables[tableName];
-
+        console.log('table: ', tableName);
         new cronJob(table.rate, job(tableName, table), null, true);
     }
 
@@ -30,16 +32,16 @@ server.init = function() {
 
                 var data = {};
 
-                for (var field in table.fields) {
-                    var value = table.fields[field]();
-                    data[field] = value;
+                for (var fieldName in table.fields) {
+                    var field = table.fields[fieldName];
 
-                    console.log(field, '-', value);
+                    if (typeof field.value !== 'undefined') {
+                        data[fieldName] = field.value();
+                        console.log(fieldName, '-', data[fieldName]);
+                    }
                 }
 
-                var modelName = en.singularize(tableName);
-
-                orm.models[modelName].create(data).success(function() {
+                orm.models[tableName].create(data).success(function() {
                     console.log('... done!');
                 });
             }

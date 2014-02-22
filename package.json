@@ -6,7 +6,6 @@
 	"dependencies": {
 		"Faker": "0.7.x",
 		"cron": "1.0.x",
-		"db-migrate": "v0.6.x",
 		"sequelize": "v1.7.x",
 		"mysql": "v2.1.x",
 		"lingo": "0.0.x"

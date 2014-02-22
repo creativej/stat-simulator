@@ -1,27 +1,32 @@
-module.exports = function(config) {
+module.exports = function(config, tables) {
     var
         Sequelize = require('sequelize'),
+        en = require('lingo').en,
         sequelize = new Sequelize(config.database, config.user, config.password),
         orm = {
             sequelize: sequelize,
-            models: {}
+            models: {},
         };
 
-    orm.models.user = sequelize.define('user', {
-        id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        name: Sequelize.STRING,
-        email: Sequelize.STRING,
-        createdAt: {
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW
+    for (var tableName in tables) {
+        var table = tables[tableName];
+        var schema = {};
+
+        for (var fieldName in table.fields) {
+            schema[fieldName] = table.fields[fieldName].type;
         }
-    }, {
-        timestamps: false
-    });
+
+        orm.models[tableName] = sequelize.define(
+            tableName,
+            schema,
+            {
+                timestamps: false,
+                tableName: tableName
+            }
+        );
+    }
+
+    sequelize.sync();
 
     return orm;
 };

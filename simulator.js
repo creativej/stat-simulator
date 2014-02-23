@@ -3,11 +3,15 @@
 **/
 var simulator = function(tableName, table, models) {
     function skip(table) {
+        var randomOffset;
+
         if (typeof table.randomOffset === 'function') {
-            return table.randomOffset();
+            randomOffset = table.randomOffset();
+        } else {
+            randomOffset = table.randomOffset;
         }
 
-        return typeof table.randomOffset === 'undefined' || Math.random() <= table.randomOffset;
+        return typeof table.randomOffset === 'undefined' || Math.random() <= randomOffset;
     }
 
     function insert(data) {

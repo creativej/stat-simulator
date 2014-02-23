@@ -60,7 +60,7 @@ module.exports = {
     visits: {
         fields: Table.fields(),
         randomOffset: function() {
-            return 0.05 + Math.random() * 0.05;
+            return 0.05 + Math.random() * 0.1;
         },
         disable: false,
         rate: '*/15 * * * * *'
